@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>3.5.0</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>com.example</groupId>
+	<artifactId>Liverpool_TicketSystem</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>Liverpool_TicketSystem</name>
+	<description>Demo project for Spring Boot</description>
+	<url/>
+	<licenses>
+		<license/>
+	</licenses>
+	<developers>
+		<developer/>
+	</developers>
+	<scm>
+		<connection/>
+		<developerConnection/>
+		<tag/>
+		<url/>
+	</scm>
+	<properties>
+		<java.version>17</java.version>
+	</properties>
+	<dependencies>
+	<!-- Thư viện cần thiết để khởi động một ứng dụng Spring Boot -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter</artifactId>
+		</dependency>
+
+	<!--  Dùng cho việc test (kiểm thử) ứng dụng.-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- cung cấp các thành phần xây web -->
+		<dependency> 
+			<groupId>org.springframework.boot</groupId> 
+			<artifactId>spring-boot-starter-web</artifactId> 
+		</dependency>
+
+        <!-- tự động khởi động lại khi code thay đổi (ko cần bấm nút restart) -->
+		<dependency> 
+			<groupId>org.springframework.boot</groupId> 
+			<artifactId>spring-boot-devtools</artifactId> 
+			<optional>true</optional> 
+		</dependency>
+
+        <!-- hỗ trợ biên dịch và chạy các file JSP -->
+		<dependency> 
+			<groupId>org.apache.tomcat.embed</groupId> 
+			<artifactId>tomcat-embed-jasper</artifactId> 
+		</dependency> 
+
+		<!-- khai báo các thẻ JSTL dùng trong JSP -->
+		<dependency> 
+			<groupId>jakarta.servlet.jsp.jstl</groupId> 
+			<artifactId>jakarta.servlet.jsp.jstl-api</artifactId> 
+		</dependency> 
+
+       <!-- Thực thi, giúp các thẻ JSTL hoạt động trong JSP -->
+		<dependency> 
+			<groupId>org.glassfish.web</groupId> 
+			<artifactId>jakarta.servlet.jsp.jstl</artifactId> 
+		</dependency> 
+
+        <!-- Hỗ trợ thao tác database theo chuẩn JPA (JPA : ánh xạ class java và table trong database)-->
+	    <dependency> 
+			<groupId>org.springframework.boot</groupId> 
+			<artifactId>spring-boot-starter-data-jpa</artifactId> 
+		</dependency>
+
+		<!-- Driver JDBC MySQL -->
+		<dependency>
+			<groupId>com.mysql</groupId>
+			<artifactId>mysql-connector-j</artifactId>
+		</dependency>
+
+
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
