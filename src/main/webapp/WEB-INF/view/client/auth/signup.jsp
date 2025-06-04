@@ -86,6 +86,15 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&family=PT+Serif+Caption:ital@0;1&display=swap" rel="stylesheet">
     <title>Sign up</title>
+
+    <style>
+        .error {
+            color: red;
+            display: block;
+        }
+    </style>
+
+
   </head>
   <body>
     <div class="khoichung">
@@ -93,11 +102,14 @@
         <img src="client/images/salah.jpg" alt="Cau thu MU so nhat" class="img" />
       </div>
       <div class="khoiphai">
+
         <div class="khoilogin">
           <h1 class="tieude">Sign up</h1>
         </div>
 
         <form:form method="post" action="/signup" modelAttribute="signUpUser">
+
+
           <div class="khoigiua">
 
           <div class="khoiuser">
@@ -118,17 +130,20 @@
           <div class="khoiconpass">
             <p class="tieude">Confirm password</p>
             <form:input class="form mail" path="confirmPassword" type="password"   />
+            <form:errors path="confirmPassword" cssClass="error" />
           </div>
 
 
-        <div class="khoinext">
+          <div class="khoinext">
           <button class="btn link" type="submit">
               Next
           </button>
+          </div>
         </div>
         </form:form>
 
-      </div>
+
     </div>
+  </div>
   </body>
 </html>

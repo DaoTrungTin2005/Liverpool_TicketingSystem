@@ -57,6 +57,12 @@ public class HomePageController {
 
         if (bindingResult.hasErrors()) {
             // Nếu có lỗi trong quá trình xác thực, trả về trang đăng ký với thông báo lỗi
+
+            // Xài return "redirect:/signup"; thì Không giữ lại thông báo lỗi và Mất dữ liệu
+            // nhập
+
+            // Xài return "client/auth/signup"; thì các lỗi validation sẽ được giữ lại, Giữ
+            // lại dữ liệu nhập
             return "client/auth/signup";
         }
 
