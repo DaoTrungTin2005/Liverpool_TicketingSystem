@@ -96,36 +96,38 @@
         <div class="khoilogin">
           <h1 class="tieude">Sign up</h1>
         </div>
-        <div class="khoigiua">
+
+        <form:form method="post" action="/signup" modelAttribute="signUpUser">
+          <div class="khoigiua">
+
           <div class="khoiuser">
-            <form action="" class="form">
-              <p class="tieude">User name</p>
-              <input type="text" class="mail" required />
-            </form>
+            <p class="tieude">User name</p>
+            <form:input class="form mail" path="username" type="text"   />
           </div>
+
           <div class="khoimail">
-            <form action="" class="form">
               <p class="tieude">Email</p>
-              <input type="email" class="mail" required />
-            </form>
+            <form:input class="form mail" path="email" type="email"   />
           </div>
+
           <div class="khoipass">
-            <form action="" class="form">
-              <p class="tieude">Password</p>
-              <input type="password" class="mail" required />
-            </form>
+            <p class="tieude">Password</p>
+            <form:input class="form mail" path="password" type="password"   />
           </div>
+
           <div class="khoiconpass">
-            <form action="" class="form">
-              <p class="tieude">Confirm password</p>
-              <input type="password" class="mail" required />
-            </form>
+            <p class="tieude">Confirm password</p>
+            <form:input class="form mail" path="confirmPassword" type="password"   />
           </div>
+
+
         <div class="khoinext">
-          <button class="btn">
-            <a href="#!" class="link">Next</a>
+          <button class="btn link" type="submit">
+              Next
           </button>
         </div>
+        </form:form>
+
       </div>
     </div>
   </body>
