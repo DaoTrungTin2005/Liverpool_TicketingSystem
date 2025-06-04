@@ -20,19 +20,20 @@ public class UserService {
     // =========================Lưu User=========================
 
     // Nhận một đối tượng User làm tham số. Gọi userRepository.save(user) để lưu
-    // hoặc cập nhật user vào database
+    // hoặc cập nhật user vào database 
     public User luuThongTinUser(User user) {
         user = this.userRepository.save(user);
         return user;
     }
 
+    
     // Dùng để lấy đối tượng Role (vai trò người dùng, ví dụ: "USER", "ADMIN") từ
     // database dựa vào tên role. (dùng để fix cứng role là user khi ng dùng đăng kí )
     public Role layRoleTheoTen(String name){
         return this.roleRepository.findByName(name);
     }
 
-    
+
     public User layUserTheoEmail (String email){
         return this.userRepository.findByEmail(email) ; 
     }

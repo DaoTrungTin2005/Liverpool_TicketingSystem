@@ -1,8 +1,11 @@
 package com.example.Liverpool_TicketSystem.Controller;
 
+import javax.naming.Binding;
+
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,6 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.example.Liverpool_TicketSystem.domain.User;
 import com.example.Liverpool_TicketSystem.domain.dto.RegisterDTO;
 import com.example.Liverpool_TicketSystem.service.UserService;
+
+import jakarta.validation.Valid;
 
 @Controller
 public class HomePageController {
@@ -22,6 +27,7 @@ public class HomePageController {
         this.passwordEncoder = passwordEncoder;
     }
 
+    // ===============================Trang Chủ==============================
     @GetMapping("/")
     public String getTestPage() {
         return "hello";
@@ -41,18 +47,27 @@ public class HomePageController {
 
     // Spring sẽ tự động lấy dữ liệu từ form (có tên các trường trùng với thuộc tính
     // của RegisterDTO) và gán vào đối tượng registerDTO
-    public String handleSignUp(@ModelAttribute("signUpUser") RegisterDTO registerDTO) {
 
-        
-        User user  = new User();
+    // @Valid để kích hoạt xác thực dữ liệu (bao gồm xác thực xem Pass và
+    // ConfirmPass có giống hay ko, email , not null ....),
+
+    // BindingResult để kiểm tra lỗi xác thực (trả về true / false)
+    public String handleSignUp(@ModelAttribute("signUpUser") @Valid RegisterDTO registerDTO,
+            BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors()) {
+            // Nếu có lỗi trong quá trình xác thực, trả về trang đăng ký với thông báo lỗi
+            return "client/auth/signup";
+        }
+
+        User user = new User();
         user.setUsername(registerDTO.getUsername());
         user.setEmail(registerDTO.getEmail());
 
-        String hashpassword =this.passwordEncoder.encode(registerDTO.getPassword());
+        String hashpassword = this.passwordEncoder.encode(registerDTO.getPassword());
         user.setPassword(hashpassword);
 
         user.setRole(this.userService.layRoleTheoTen("USER"));
-
 
         this.userService.luuThongTinUser(user);
         return "redirect:/signin"; // chuyển hướng đến trang đăng nhập sau khi đăng ký thành công

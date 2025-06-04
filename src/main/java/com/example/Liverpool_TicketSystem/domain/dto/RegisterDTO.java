@@ -1,5 +1,8 @@
 package com.example.Liverpool_TicketSystem.domain.dto;
 
+import com.example.Liverpool_TicketSystem.service.validator.RegisterChecked;
+
+@RegisterChecked
 public class RegisterDTO {
     private String username; 
     private String email;
