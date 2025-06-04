@@ -1,0 +1,132 @@
+* {
+  box-sizing: border-box;
+}
+html {
+  font-size: 62.5%;
+}
+body {
+  font-size: 1.6rem;
+  font-family: "Orbitron", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400px;
+  font-style: normal;
+}
+/* chung */
+.tieude {
+  color: #000;
+  font-size: 4rem;
+}
+.mail {
+  border: 3px #be1c0d solid;
+  width: 618px;
+  height: 60px;
+  cursor: pointer;
+}
+a {
+  text-decoration: none;
+}
+input,
+textarea,
+select,
+button {
+  font-family: inherit;
+  font-size: inherit;
+}
+/* code */
+.khoichung {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  position: fixed;
+}
+.khoitrai {
+  flex: 1;
+}
+.khoitrai .img {
+  height: 100%;
+  width: 100%;
+  display: block;
+  position: relative;
+  object-fit: cover;
+  object-position: top;
+}
+.img {
+  width: 300px;
+  animation: hehehe 4s ease-in-out 1;
+}
+@keyframes hehehe {
+  0%,
+  100% {
+    opacity: 0;
+    filter: blur(4px);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0px);
+  }
+}
+.khoiphai {
+  flex: 1;
+  object-fit: cover;
+  display: flex;
+  flex-direction: column;
+  background: #fffafa;
+}
+.khoilogin {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.khoiphai .khoilogin .tieude {
+  font-size: 96px;
+  padding: 0px 120px 30px;
+}
+.khoigiua {
+  padding: 0px 50px 73px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.khoiuser {
+  padding-top: 0;
+  padding-bottom: 20px;
+}
+.khoimail {
+  padding-bottom: 26px;
+}
+.khoipass {
+  padding-bottom: 26px;
+}
+.khoiconpass {
+  padding-bottom: 30px;
+}
+.khoinext {
+  padding-top: 0px;
+  padding-left: 110px;
+  padding-right: 110px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.btn {
+  width: 470px;
+  height: 88px;
+  border-radius: 50px;
+  background: #be1c0d;
+  transition: 0.25s;
+  cursor: pointer;
+}
+.link {
+  color: #fff4f4;
+  font-size: 4rem;
+  transition: 0.25s;
+}
+.btn:hover {
+  background-color: black;
+  box-shadow: 5px 10px 10px 5px rgba(0, 0, 0, 0.25);
+}
+.btn:hover .link {
+  color: #be1c0d;
+}
