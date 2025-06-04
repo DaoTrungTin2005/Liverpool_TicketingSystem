@@ -113,7 +113,7 @@
             </form>
           </div>
           <div class="khoilogin">
-            <a href="/signup" class="tieude">SignUp</a>
+            <a href="/signup" class="tieude signup__hover">SignUp</a>
           </div>
         </div>
         <div class="khoinext">

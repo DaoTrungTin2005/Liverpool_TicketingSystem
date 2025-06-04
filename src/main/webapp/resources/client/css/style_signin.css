@@ -124,3 +124,6 @@ button {
 .btn:hover .link {
   color: #be1c0d;
 }
+.signup__hover:hover{
+  color: #be1c0d ;
+}

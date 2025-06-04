@@ -83,7 +83,7 @@ button {
   padding: 0px 120px 30px;
 }
 .khoigiua {
-  padding: 0px 50px 73px;
+  padding: 0px 70px 50px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -91,13 +91,13 @@ button {
 }
 .khoiuser {
   padding-top: 0;
-  padding-bottom: 20px;
+  padding-bottom: 10px;
 }
 .khoimail {
-  padding-bottom: 26px;
+  padding-bottom: 10px;
 }
 .khoipass {
-  padding-bottom: 26px;
+  padding-bottom: 10px;
 }
 .khoiconpass {
   padding-bottom: 30px;
