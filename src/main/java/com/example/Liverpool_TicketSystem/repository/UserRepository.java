@@ -9,6 +9,10 @@ public interface UserRepository extends JpaRepository<User, Long> {
     // đối tượng User.
     User save(User user);
 
-    User findByEmail(String Email) ; 
+    User findByEmail(String email) ;
+
+    // để kiểm tra coi email đã tồn tại trong database hay chưa
+    // Nếu tồn tại thì trả về true, nếu không thì trả về false
+    boolean existsByEmail(String email) ;
     
 }

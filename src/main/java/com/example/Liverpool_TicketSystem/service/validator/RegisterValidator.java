@@ -8,9 +8,11 @@ import com.example.Liverpool_TicketSystem.service.UserService;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
-
-
 @Service
+
+// Khi bạn gắn @RegisterChecked lên class RegisterDTO và dùng @Valid trong
+// controller, Spring sẽ tự động gọi phương thức isValid(...) trong
+// RegisterValidator để kiểm tra dữ liệu hợp lệ.
 public class RegisterValidator implements ConstraintValidator<RegisterChecked, RegisterDTO> {
     private final UserService userService;
 
@@ -24,7 +26,7 @@ public class RegisterValidator implements ConstraintValidator<RegisterChecked, R
 
         // Check if password fields match
         if (!user.getPassword().equals(user.getConfirmPassword())) {
-            context.buildConstraintViolationWithTemplate("Nhap Sai Password ")
+            context.buildConstraintViolationWithTemplate("Incorrect password")
                     .addPropertyNode("confirmPassword")
                     .addConstraintViolation()
                     .disableDefaultConstraintViolation();
@@ -33,7 +35,14 @@ public class RegisterValidator implements ConstraintValidator<RegisterChecked, R
 
         // Additional validations can be added here
 
-
+        // check email tồn tại hay chưa
+        if (this.userService.kiemTraEmailTonTai(user.getEmail())) {
+            context.buildConstraintViolationWithTemplate("Email already exists.")
+                    .addPropertyNode("email")
+                    .addConstraintViolation()
+                    .disableDefaultConstraintViolation();
+            valid = false;
+        }
         return valid;
     }
 }

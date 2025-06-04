@@ -120,6 +120,7 @@
           <div class="khoimail">
               <p class="tieude">Email</p>
             <form:input class="form mail" path="email" type="email"   />
+            <form:errors class="error" path="email"  />
           </div>
 
           <div class="khoipass">
@@ -130,7 +131,7 @@
           <div class="khoiconpass">
             <p class="tieude">Confirm password</p>
             <form:input class="form mail" path="confirmPassword" type="password"   />
-            <form:errors path="confirmPassword" cssClass="error" />
+            <form:errors class="error" path="confirmPassword"  />
           </div>
 
 
@@ -139,6 +140,7 @@
               Next
           </button>
           </div>
+
         </div>
         </form:form>
 
