@@ -135,6 +135,11 @@
 
           <%-- Bắt lỗi nếu đăng nhập sai (Email không tồn tại hoặc pass sai) --%>
 
+          <%-- Khi đăng nhập sai, Spring Security sẽ tự động chuyển hướng về /signin?error.
+          Lúc này, trên URL sẽ có tham số error (ví dụ: http://localhost:8080/signin?error).
+          request.getParameter("error") sẽ lấy giá trị của tham số này.
+          Nếu có lỗi, error sẽ khác null, nên đoạn <div>...</div> sẽ được in ra view để báo lỗi cho người dùng. --%>
+
           <% String error = request.getParameter("error"); %>
           <% if (error != null) { %>
               <div style="color: red; margin-left: 70px; ">Login failed. Please check your email or password</div>
