@@ -90,38 +90,79 @@
     />
     <title>Sign in</title>
   </head>
+
   <body>
     <div class="khoichung">
+
       <div class="khoitrai">
         <img src="client/images/salah.jpg" alt="Cau thu MU so nhat" class="img" />
       </div>
+
       <div class="khoiphai">
+
         <div class="khoisign">
           <h1 class="tieude">Sign in</h1>
         </div>
+
+        <%-- Khi người dùng submit form đăng nhập, dữ liệu sẽ được gửi lên server bằng phương thức POST tới đường dẫn /signin. --%>
+        <%-- vẫn cần dòng <form:form method="post" action="/signin" > trong view đăng nhập, dù controller chỉ có @GetMapping("/signin"). --%>
+        <%-- Lý do:
+        Khi người dùng nhập email và password rồi nhấn "Next", form sẽ gửi POST tới /signin.
+        Spring Security sẽ tự động xử lý POST /signin để xác thực đăng nhập, không cần bạn viết controller @PostMapping("/signin").
+        Chỉ cần controller @GetMapping("/signin") để hiển thị trang đăng nhập. --%>
+
+        <form method="post" action="/signin" >
+
         <div class="khoigiua">
+
           <div class="khoimail">
-            <form action="" class="form">
               <p class="tieude">Email</p>
-              <input type="email" class="mail" required />
-            </form>
+
+              <%-- Bạn cần name="username" và name="password" trong form login vì Spring Security mặc định chỉ nhận đúng hai tham số này khi xử lý đăng nhập --%>
+              <%-- Nếu bạn đổi thành name="email" hoặc tên khác, Spring Security sẽ không tự động lấy giá trị đó để xác thực, trừ khi bạn cấu hình lại. --%>
+              <%-- DaoAuthenticationProvider là nơi xử lý logic xác thực, so sánh mật khẩu, và chỉ nhận đúng hai tham số username và password từ form mặc định của Spring Security. --%>
+
+              <%-- Còn phần path là các thuộc tính ở domain  --%>
+              <input class="mail" path="email" type="email" name="username"/>
           </div>
+
           <div class="khoipass">
-            <form action="" class="form">
               <p class="tieude">Password</p>
-              <input type="password" class="mail" required />
-            </form>
+              <input class="mail" path="password" type="password" name="password"/>
           </div>
+
           <div class="khoilogin">
             <a href="/signup" class="tieude signup__hover">SignUp</a>
           </div>
-        </div>
+
+          <%-- CSRF token. Spring Security yêu cầu mỗi form POST phải gửi kèm token này để bảo vệ khỏi tấn công CSRF. --%>
+          <%-- Nếu bạn xóa dòng này, khi submit form đăng nhập (hoặc bất kỳ form POST nào), bạn sẽ gặp lỗi 403 Forbidden --%>
+
+          <%-- CSRF là: Hacker lợi dụng phiên đăng nhập của bạn để thực hiện hành động trái phép. --%>
+          <%-- Ví dụ : --%>
+          <%-- Bạn đã đăng nhập vào tài khoản ngân hàng --%>
+          <%-- Kẻ tấn công gửi cho bạn một link độc hại hoặc nhúng mã vào một trang web khác. --%>
+          <%-- Khi bạn bấm vào link đó (hoặc chỉ cần truy cập trang có mã độc), trình duyệt của bạn sẽ gửi một request (ví dụ: chuyển tiền) tới website ngân hàng với quyền của bạn, vì bạn đang đăng nhập. --%>
+          <%-- Hệ thống ngân hàng sẽ nghĩ đó là hành động hợp lệ của bạn. --%>
+
+          <%-- Cách phòng chống: --%>
+          <%-- CSRF Token: Mỗi form POST sẽ có một mã token bí mật (ẩn trong form). Khi gửi form, server kiểm tra token này. Nếu không đúng hoặc không có, request sẽ bị từ chối. --%>
+          <div>
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+          </div>
+
+
         <div class="khoinext">
-          <button class="btn">
-            <a href="#!" class="link">Next</a>
+          <button class="btn link" type="submit">
+                Next
           </button>
         </div>
+
       </div>
+
+      </form>
+
+    </div>
     </div>
   </body>
 </html>

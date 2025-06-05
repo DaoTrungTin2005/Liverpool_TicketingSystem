@@ -107,6 +107,7 @@
           <h1 class="tieude">Sign up</h1>
         </div>
 
+        <%-- action="/signup" trong thẻ <form:form> nghĩa là khi người dùng submit form, dữ liệu sẽ được gửi (POST) tới đường dẫn /signup trên server. --%>
         <form:form method="post" action="/signup" modelAttribute="signUpUser">
 
 
@@ -144,6 +145,7 @@
           </div>
 
         </div>
+
         </form:form>
 
 

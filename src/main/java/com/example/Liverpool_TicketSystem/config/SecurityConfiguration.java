@@ -3,9 +3,11 @@ package com.example.Liverpool_TicketSystem.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
 
 import com.example.Liverpool_TicketSystem.service.CustomUserDetailsService;
 import com.example.Liverpool_TicketSystem.service.UserService;
@@ -64,6 +66,50 @@ public class SecurityConfiguration {
         // authProvider.setHideUserNotFoundExceptions(false);
 
         return authProvider;
+    }
+
+    // ===========================================================================
+
+    // SecurityFilterChain để Spring Security biết cách bảo vệ các URL,
+    // cấu hình đăng nhập, phân quyền, logout, CSRF, v.v.
+
+    // Ví dụ:
+    // .authorizeHttpRequests(...): Cấu hình quyền truy cập cho từng URL.
+    // .formLogin(...): Cấu hình đăng nhập bằng form.
+    // .logout(...): Cấu hình logout.
+    // .csrf(...): Cấu hình CSRF.
+
+    // Tham số HttpSecurity http cho phép bạn cấu hình các rule bảo mật
+    // bằng Java code (method chaining).
+
+    @Bean
+    SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+
+        // http.authorizeHttpRequests(...): Bắt đầu cấu hình các quy tắc
+        // phân quyền cho các request HTTP.
+        http
+                .authorizeHttpRequests(authorize -> authorize
+
+                        // Nếu để dòng này thì dô bất kì trang nào cũng không cần đăng nhập
+                        .anyRequest().permitAll())
+
+                // formLogin(...): Cấu hình đăng nhập bằng form.
+                .formLogin(formLogin -> formLogin
+
+                        // Sử dụng trang đăng nhập custom tại /signin (thay vì trang mặc định)
+                        // Đổi thành /signin ứng vs action="/signin" trong signin.jsp
+                        // Lúc này, Spring Security sẽ hiển thị trang /signin cho người dùng
+                        .loginPage("/signin")
+
+                        // Nếu đăng nhập sai, chuyển hướng về /signin?error
+                        .failureUrl("/signin?error")
+
+                        // Spring Security mặc định chuyển về / sau khi đăng nhập thành công
+                        // Nếu muốn đổi : .defaultSuccessUrl("/home", true) // <-- Thêm dòng này
+
+                        // .permitAll(): Ai cũng truy cập được trang đăng nhập.
+                        .permitAll());
+        return http.build();
     }
 
 }
