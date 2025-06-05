@@ -12,6 +12,8 @@ import org.springframework.security.web.SecurityFilterChain;
 import com.example.Liverpool_TicketSystem.service.CustomUserDetailsService;
 import com.example.Liverpool_TicketSystem.service.UserService;
 
+import jakarta.servlet.DispatcherType;
+
 @Configuration
 
 public class SecurityConfiguration {
@@ -90,8 +92,19 @@ public class SecurityConfiguration {
         http
                 .authorizeHttpRequests(authorize -> authorize
 
-                        // Nếu để dòng này thì dô bất kì trang nào cũng không cần đăng nhập
-                        .anyRequest().permitAll())
+                        // Không có cái này dô localhost:8080/ nó báo lỗi (không load được view)
+                        .dispatcherTypeMatchers(DispatcherType.FORWARD,
+                                DispatcherType.INCLUDE)
+                        .permitAll()
+
+                        // Nếu để dòng này thì dô bất kỳ trang nào cũng không cần đăng nhập
+                        // .anyRequest().permitAll())
+
+                        // Cho phép truy cập các thư mục chỉ định, còn lại thì phải signin
+                        .requestMatchers("/signin", "/signup", "client/css/**", "client/js/**",
+                                "client/images/**")
+                        .permitAll()
+                        .anyRequest().authenticated())
 
                 // formLogin(...): Cấu hình đăng nhập bằng form.
                 .formLogin(formLogin -> formLogin
