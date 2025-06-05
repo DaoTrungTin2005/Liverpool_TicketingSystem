@@ -115,6 +115,7 @@
           <div class="khoiuser">
             <p class="tieude">User name</p>
             <form:input class="form mail" path="username" type="text"   />
+            <form:errors class="error" path="username"  />
           </div>
 
           <div class="khoimail">
@@ -126,6 +127,7 @@
           <div class="khoipass">
             <p class="tieude">Password</p>
             <form:input class="form mail" path="password" type="password"   />
+            <form:errors class="error" path="password"  />
           </div>
 
           <div class="khoiconpass">
