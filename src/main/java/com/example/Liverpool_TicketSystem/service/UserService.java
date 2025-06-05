@@ -34,11 +34,14 @@ public class UserService {
         return this.roleRepository.findByName(name);
     }
 
+    // ============ Lấy User theo email để check signin =================
+    // (vì khi signin ta cần nhập email)
     public User layUserTheoEmail(String email) {
         return this.userRepository.findByEmail(email);
     }
 
-    //============== Kiểm tra email đã tồn tại hay chưa ==============
+    // ============== Kiểm tra email đã tồn tại hay chưa ==============
+    // cái này để check lúc signup (đăng ký) tài khoản
     public boolean kiemTraEmailTonTai(String email) {
         return this.userRepository.existsByEmail(email);
     }
