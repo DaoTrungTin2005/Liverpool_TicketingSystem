@@ -113,6 +113,8 @@
 
         <form method="post" action="/signin" >
 
+
+
         <div class="khoigiua">
 
           <div class="khoimail">
@@ -130,6 +132,13 @@
               <p class="tieude">Password</p>
               <input class="mail" path="password" type="password" name="password"/>
           </div>
+
+          <%-- Bắt lỗi nếu đăng nhập sai (Email không tồn tại hoặc pass sai) --%>
+
+          <% String error = request.getParameter("error"); %>
+          <% if (error != null) { %>
+              <div style="color: red; margin-left: 70px; ">Login failed. Please check your email or password</div>
+          <% } %> 
 
           <div class="khoilogin">
             <a href="/signup" class="tieude signup__hover">SignUp</a>
