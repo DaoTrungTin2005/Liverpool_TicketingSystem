@@ -1,5 +1,7 @@
 package com.example.Liverpool_TicketSystem.config;
 
+import javax.swing.Spring;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -8,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 import com.example.Liverpool_TicketSystem.service.CustomUserDetailsService;
 import com.example.Liverpool_TicketSystem.service.UserService;
@@ -71,6 +74,21 @@ public class SecurityConfiguration {
     }
 
     // ===========================================================================
+    // Tạo một Bean AuthenticationSuccessHandler dùng để xử lý hành động khi người
+    // dùng đăng nhập thành công.
+
+    // AuthenticationSuccessHandler: là interface của Spring Security, định nghĩa
+    // cách xử lý sau khi người dùng đăng nhập thành công.
+
+    // CustomSuccessHandler là class bạn viết để tùy chỉnh việc chuyển hướng người
+    // dùng dựa trên vai trò (role) sau khi đăng nhập thành công (ví dụ: chuyển
+    // admin đến /admin, user đến /).
+    @Bean
+    public AuthenticationSuccessHandler customSuccessHandler(UserService userService) {
+        return new CustomSuccessHandler(userService);
+    }
+
+    // ===========================================================================
 
     // SecurityFilterChain để Spring Security biết cách bảo vệ các URL,
     // cấu hình đăng nhập, phân quyền, logout, CSRF, v.v.
@@ -85,7 +103,7 @@ public class SecurityConfiguration {
     // bằng Java code (method chaining).
 
     @Bean
-    SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    SecurityFilterChain filterChain(HttpSecurity http, UserService userService) throws Exception {
 
         // http.authorizeHttpRequests(...): Bắt đầu cấu hình các quy tắc
         // phân quyền cho các request HTTP.
@@ -122,6 +140,21 @@ public class SecurityConfiguration {
 
                         // Nếu đăng nhập sai, chuyển hướng về /signin?error
                         .failureUrl("/signin?error")
+
+                        // .successHandler(...) là method của Spring Security dùng để đăng ký một
+                        // AuthenticationSuccessHandler — tức là một đối tượng xử lý hành động sau khi
+                        // đăng nhập thành công.
+
+                        // customSuccessHandler(userService) gọi tới method tạo bean
+                        // AuthenticationSuccessHandler mà bạn định nghĩa (trong class
+                        // SecurityConfiguration), trả về đối tượng CustomSuccessHandler.
+
+                        // Khi người dùng đăng nhập thành công, Spring Security sẽ gọi phương thức
+                        // onAuthenticationSuccess(...) trong CustomSuccessHandler để thực hiện các
+                        // logic tùy chỉnh (ví dụ: chuyển hướng người dùng đến trang phù hợp theo role,
+                        // ghi log, cập nhật trạng thái user, v.v).
+
+                        .successHandler(customSuccessHandler(userService))
 
                         // Spring Security mặc định chuyển về / sau khi đăng nhập thành công
                         // Nếu muốn đổi : .defaultSuccessUrl("/home", true) // <-- Thêm dòng này
