@@ -160,7 +160,11 @@ public class SecurityConfiguration {
                         // Nếu muốn đổi : .defaultSuccessUrl("/home", true) // <-- Thêm dòng này
 
                         // .permitAll(): Ai cũng truy cập được trang đăng nhập.
-                        .permitAll());
+                        .permitAll())
+
+                // Cấu hình trang hiển thị khi người dùng bị từ chối truy cập (HTTP 403 -
+                // Forbidden) vì không đủ quyền (role).
+                .exceptionHandling(ex -> ex.accessDeniedPage("/access-denied"));
         return http.build();
     }
 

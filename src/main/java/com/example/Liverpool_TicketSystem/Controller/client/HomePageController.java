@@ -1,7 +1,5 @@
 package com.example.Liverpool_TicketSystem.Controller.client;
 
-
-
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -83,6 +81,12 @@ public class HomePageController {
     @GetMapping("/signin")
     public String getSignInPage() {
         return "client/auth/signin";
+    }
+
+    // ===============================Trang Từ Chối==============================
+    @GetMapping("/access-denied")
+    public String getDenyPage(Model model) {
+        return "client/auth/deny";
     }
 
 }
