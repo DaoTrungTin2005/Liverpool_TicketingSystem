@@ -111,8 +111,8 @@ button {
   justify-content: center;
 }
 .btn {
-  width: 470px;
-  height: 88px;
+  width: 400px;
+  height: 70px;
   border-radius: 50px;
   background: #be1c0d;
   transition: 0.25s;
