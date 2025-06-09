@@ -104,6 +104,12 @@ public class SecurityConfiguration {
                         .requestMatchers("/signin", "/signup", "client/css/**", "client/js/**",
                                 "client/images/**")
                         .permitAll()
+
+                        // Có ROlE là admin thì mới được truy cập các URL bắt đầu bằng /admin/
+                        // Còn ROLE là user thì khi truy cập nó báo về lỗi 403 Forbidden
+                        // Sẽ làm 1 cái trang để hiển thị lỗi 403 này
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
+
                         .anyRequest().authenticated())
 
                 // formLogin(...): Cấu hình đăng nhập bằng form.

@@ -1,6 +1,6 @@
-package com.example.Liverpool_TicketSystem.Controller;
+package com.example.Liverpool_TicketSystem.Controller.client;
 
-import javax.naming.Binding;
+
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
