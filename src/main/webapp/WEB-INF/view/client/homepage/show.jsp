@@ -26,6 +26,7 @@
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
             <button>Đăng xuất</button>
+
         </form>
 </body>
-</html>
+</html> 

@@ -143,7 +143,14 @@
           <% String error = request.getParameter("error"); %>
           <% if (error != null) { %>
               <div style="color: red; margin-left: 70px; ">Login failed. Please check your email or password</div>
-          <% } %> 
+          <% } %>
+
+          <%-- Hiển thị dòng thông báo khi Logout thành công (nó tự chuyển về /signin?logout )--%>
+
+          <% String logout = request.getParameter("logout"); %>
+          <% if (logout != null) { %>
+              <div style="color: rgb(0, 128, 66); margin-left: 70px; ">Logout Success</div>
+          <% } %>
 
           <div class="khoilogin">
             <a href="/signup" class="tieude signup__hover">SignUp</a>
