@@ -27,8 +27,8 @@ public class HomePageController {
 
     // ===============================Trang Chủ==============================
     @GetMapping("/")
-    public String getTestPage() {
-        return "hello";
+    public String getHomePage() {
+        return "client/homepage/show";
 
     }
 
