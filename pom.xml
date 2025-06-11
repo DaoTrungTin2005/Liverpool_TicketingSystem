@@ -44,40 +44,40 @@
 		</dependency>
 
 		<!-- cung cấp các thành phần xây web -->
-		<dependency> 
-			<groupId>org.springframework.boot</groupId> 
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
         <!-- tự động khởi động lại khi code thay đổi (ko cần bấm nút restart) -->
-		<dependency> 
-			<groupId>org.springframework.boot</groupId> 
-			<artifactId>spring-boot-devtools</artifactId> 
-			<optional>true</optional> 
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<optional>true</optional>
 		</dependency>
 
         <!-- hỗ trợ biên dịch và chạy các file JSP -->
-		<dependency> 
-			<groupId>org.apache.tomcat.embed</groupId> 
-			<artifactId>tomcat-embed-jasper</artifactId> 
-		</dependency> 
+		<dependency>
+			<groupId>org.apache.tomcat.embed</groupId>
+			<artifactId>tomcat-embed-jasper</artifactId>
+		</dependency>
 
 		<!-- khai báo các thẻ JSTL dùng trong JSP -->
-		<dependency> 
-			<groupId>jakarta.servlet.jsp.jstl</groupId> 
-			<artifactId>jakarta.servlet.jsp.jstl-api</artifactId> 
-		</dependency> 
+		<dependency>
+			<groupId>jakarta.servlet.jsp.jstl</groupId>
+			<artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
+		</dependency>
 
        <!-- Thực thi, giúp các thẻ JSTL hoạt động trong JSP -->
-		<dependency> 
-			<groupId>org.glassfish.web</groupId> 
-			<artifactId>jakarta.servlet.jsp.jstl</artifactId> 
-		</dependency> 
+		<dependency>
+			<groupId>org.glassfish.web</groupId>
+			<artifactId>jakarta.servlet.jsp.jstl</artifactId>
+		</dependency>
 
         <!-- Hỗ trợ thao tác database theo chuẩn JPA (JPA : ánh xạ class java và table trong database)-->
-	    <dependency> 
-			<groupId>org.springframework.boot</groupId> 
-			<artifactId>spring-boot-starter-data-jpa</artifactId> 
+	    <dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
 
 		<!-- Driver JDBC MySQL -->
@@ -87,16 +87,23 @@
 		</dependency>
 
 		<!-- Spring Security -->
-		<dependency> 
-			<groupId>org.springframework.boot</groupId> 
-			<artifactId>spring-boot-starter-security</artifactId> 
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 
         <!-- Validate dữ liệu -->
 		<!-- để sử dụng các annotation validation như @NotNull, @Email, @Constraint, @Valid, v.v. trong Spring Boot. -->
 		<dependency>
-			<groupId>org.springframework.boot</groupId>  
-			<artifactId>spring-boot-starter-validation</artifactId>  
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
+		</dependency>
+
+		<!-- Đây là thư viện của Spring Session dùng để lưu session vào database (JDBC) thay vì lưu trên memory hoặc cookie mặc định.
+		Khi dùng dependency này, session của người dùng (bao gồm cả thông tin đăng nhập, remember-me, v.v.) sẽ được lưu vào bảng trong database (MySQL, PostgreSQL, v.v.). -->
+		<dependency>
+			<groupId>org.springframework.session</groupId>
+			<artifactId>spring-session-jdbc</artifactId>
 		</dependency>
 
 

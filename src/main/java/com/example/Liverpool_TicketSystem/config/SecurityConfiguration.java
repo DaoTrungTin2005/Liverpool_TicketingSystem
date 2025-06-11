@@ -11,6 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.session.security.web.authentication.SpringSessionRememberMeServices;
 
 import com.example.Liverpool_TicketSystem.service.CustomUserDetailsService;
 import com.example.Liverpool_TicketSystem.service.UserService;
@@ -90,6 +91,40 @@ public class SecurityConfiguration {
 
     // ===========================================================================
 
+    // Tạo một bean để cấu hình chức năng remember-me cho Spring Security khi bạn
+    // dùng Spring Session (lưu session vào database)
+
+    // SpringSessionRememberMeServices là một class của Spring Session dùng để quản
+    // lý chức năng "remember-me"
+
+    // Chức năng chính:
+
+    // Tạo và xác thực cookie "remember-me":
+    // Khi người dùng đăng nhập, class này sẽ tạo cookie remember-me và gửi về trình
+    // duyệt. Nếu session hết hạn hoặc bị xoá, Spring Security sẽ kiểm tra cookie
+    // này để tự động đăng nhập lại cho người dùng.
+
+    // Kết hợp với Spring Session:
+    // Khác với PersistentTokenBasedRememberMeServices (dùng với session mặc định),
+    // SpringSessionRememberMeServices được thiết kế để hoạt động tốt với session
+    // lưu trên database hoặc các hệ thống phân tán.
+
+    @Bean
+    public SpringSessionRememberMeServices rememberMeServices() {
+
+        // Tạo một instance của SpringSessionRememberMeServices, class này giúp Spring
+        // Security quản lý cookie "remember-me" khi dùng Spring Session.
+        SpringSessionRememberMeServices rememberMeServices = new SpringSessionRememberMeServices();
+
+        // Luôn luôn bật chức năng remember-me, không cần checkbox hoặc input
+        // "remember-me" trên form. Mỗi lần đăng nhập thành công, Spring Security sẽ tự
+        // động tạo cookie "remember-me".
+        rememberMeServices.setAlwaysRemember(true);
+
+        return rememberMeServices;
+    }
+    // ===========================================================================
+
     // SecurityFilterChain để Spring Security biết cách bảo vệ các URL,
     // cấu hình đăng nhập, phân quyền, logout, CSRF, v.v.
 
@@ -129,6 +164,19 @@ public class SecurityConfiguration {
                         .requestMatchers("/admin/**").hasRole("ADMIN")
 
                         .anyRequest().authenticated())
+
+                // Đây là cấu hình cho Spring Security để bật chức năng "Remember Me" (giữ đăng
+                // nhập lâu dài).
+
+                // Bạn chỉ định cho Spring Security sử dụng bean rememberMeServices() mà bạn đã
+                // định nghĩa ở trên (trả về SpringSessionRememberMeServices).
+
+                // Nhờ đó, mỗi lần người dùng đăng nhập thành công, Spring Security sẽ tự động
+                // tạo cookie remember-me (vì bạn đã setAlwaysRemember(true)), giúp người dùng
+                // không cần đăng nhập lại kể cả khi đóng trình duyệt hoặc session hết hạn
+                // (trong thời gian hiệu lực của cookie).
+
+                .rememberMe(r -> r.rememberMeServices(rememberMeServices()))
 
                 // formLogin(...): Cấu hình đăng nhập bằng form.
                 .formLogin(formLogin -> formLogin
