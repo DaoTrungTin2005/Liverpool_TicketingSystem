@@ -12,13 +12,16 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
+import org.springframework.security.web.WebAttributes;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
+import com.example.Liverpool_TicketSystem.domain.User;
 import com.example.Liverpool_TicketSystem.service.UserService;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 //CustomSuccessHandler là class dùng để xử lý logic sau khi người dùng đăng nhập thành công (login success). Nó cho phép bạn quyết định chuyển hướng (redirect) người dùng đến trang nào, dựa trên vai trò (ROLE) của họ.
 //Lớp này implement AuthenticationSuccessHandler => bắt buộc phải override method onAuthenticationSuccess.
@@ -37,6 +40,12 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler {
     // Kiểm tra trạng thái tài khoản, v.v...
     // Lúc đó bạn cần tương tác với database, và UserService là nơi chứa logic để
     // làm việc này.
+
+    // À ra là truyền userService dô để sài phương thức layUserTheoEmail(email) để
+    // lấy thông tin người dùng sau khi đăng nhập thành công.(đăng nhập thì sẽ dùng
+    // email) .
+    // Từ đó truyền thông tin username,... lên view (để hiển thị tên người dùng)
+
     private UserService userService;
 
     public CustomSuccessHandler(UserService userService) {
@@ -124,7 +133,8 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler {
         throw new IllegalStateException();
     }
 
-    // ===========================================================================
+    // ============================================================================
+
     // Thực hiện chuyển hướng bằng cách gửi lệnh HTTP redirect cho trình duyệt để nó
     // tải trang tương ứng.
     // (Đây là object giúp thực hiện việc chuyển hướng (redirect) người dùng)
@@ -186,8 +196,163 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler {
         // HTTP (HTTP redirect) đến URL được xác định trong targetUrl.
         // Nói cách khác, server sẽ gửi lệnh cho trình duyệt: "Hãy tải trang mới tại URL
         // này."
+
         redirectStrategy.sendRedirect(request, response, targetUrl);
 
+        // Cần có phương thức này để xoá thông tin lỗi đăng nhập cũ khỏi session. (từ đó
+        // khi truyền thông tin lên view (username, ...) nó mới hiển thị)
+
+        // nếu bạn không gọi dòng này, có thể xảy ra lỗi hiển thị thông báo sai hoặc
+        // session bị ghi đè — gián tiếp làm cho dữ liệu bạn set (như username) không
+        // được hiển thị đúng.
+
+        // Phương thức này được định nghĩa bên dưới á
+
+        clearAuthenticationAttributes(request, authentication);
+
     }
+
+    // ===========================================================================
+
+    // 1. Khi KHÔNG sử dụng phương thức này
+    // Bạn đăng nhập sai, Spring Security sẽ lưu thông tin lỗi vào session với key
+    // WebAttributes.AUTHENTICATION_EXCEPTION.
+    // Sau đó, bạn đăng nhập đúng, nếu không gọi clearAuthenticationAttributes,
+    // thông tin lỗi vẫn còn trong session.
+    // Khi bạn chuyển trang hoặc reload, có thể giao diện vẫn hiển thị thông báo lỗi
+    // cũ (ví dụ: "Sai mật khẩu") dù bạn đã đăng nhập thành công.
+
+    // 2. Khi CÓ sử dụng phương thức này
+    // Sau khi đăng nhập thành công, phương thức này sẽ xoá thông tin lỗi đăng nhập
+    // cũ khỏi session.
+    // Khi bạn chuyển trang hoặc reload, sẽ không còn thông báo lỗi cũ xuất hiện
+    // nữa.
+    // Trải nghiệm người dùng sẽ đúng: đăng nhập thành công thì không còn báo lỗi
+    // cũ.
+
+    // Sau khi đăng nhập thành công, bạn sẽ không thấy trang đăng nhập nữa.
+    // Nhưng việc xoá lỗi đăng nhập cũ khỏi session là để đảm bảo chắc chắn:
+    // Không có thông báo lỗi cũ nào bị hiển thị lại ở bất kỳ trang nào sau khi đăng
+    // nhập thành công.
+
+    // Đây là best practice trong Spring Security để tránh hiển thị nhầm thông báo
+    // lỗi cho người dùng.
+
+    // ===============================================================
+
+    // 1. HttpServletRequest request
+    // Đây là đối tượng đại diện cho yêu cầu HTTP từ client (trình duyệt) gửi lên
+    // server.
+
+    // Bạn dùng request để:
+
+    // Lấy session:
+    // HttpSession session = request.getSession(false);
+    // Lấy các tham số truyền lên từ form, URL,...
+    // Truy cập cookie, header, IP,...
+
+    // 👉 Trong trường hợp hàm clearAuthenticationAttributes(), nó dùng request để
+    // truy cập HttpSession và xóa thông tin lỗi đăng nhập cũ:
+    // session.removeAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
+
+    // 2. Authentication authentication
+    // Đây là đối tượng chứa thông tin xác thực của người dùng, được Spring Security
+    // tạo ra sau khi xác thực thành công.
+
+    // Nó cho bạn biết:
+    // Người dùng là ai (username/email)
+    // Có vai trò (role)/quyền gì
+    // Đăng nhập bằng cách nào (form login, token,...)
+
+    // authentication.getName(); // trả về username
+    // authentication.getAuthorities(); // danh sách quyền (roles)
+
+    protected void clearAuthenticationAttributes(HttpServletRequest request, Authentication authentication) {
+
+        // Dòng này cố gắng **lấy session hiện tại** từ `request`.
+        // `false` nghĩa là: **nếu không có session thì không tạo mới**.
+        // → Tránh tạo session không cần thiết.
+
+        HttpSession session = request.getSession(false);
+
+        // Nếu không có session, thì thoát ra ngay (không làm gì cả).
+        // Tránh gọi removeAttribute trên session null (tránh lỗi NullPointerException).
+
+        if (session == null) {
+            return;
+        }
+
+        // - Dòng này **xóa thuộc tính lỗi xác thực** khỏi session.
+        // - `WebAttributes.AUTHENTICATION_EXCEPTION` là **hằng số** đại diện cho key
+        // dùng để lưu lỗi xác thực trong Spring Security (thường là exception như
+        // `BadCredentialsException`).
+        // - Nếu không xóa đi, **lỗi cũ có thể bị hiển thị sai** ở lần login tiếp theo.
+
+        session.removeAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
+
+        // | Thành phần | Ý nghĩa |
+        // |------------|--------|
+        // | `HttpServletRequest request` | Yêu cầu HTTP từ client |
+        // | `Authentication authentication` | Đối tượng chứa thông tin xác thực của
+        // người dùng |
+        // | `getSession(false)` | Lấy session hiện có, không tạo mới |
+        // | `removeAttribute(...)` | Xóa lỗi xác thực khỏi session |
+
+        // ===========================================================================
+
+        // 🔹 1. HTTP dùng để làm gì?
+        // HTTP là cầu nối giữa client và server. Ví dụ:
+
+        // Khi bạn gõ một địa chỉ web như https://www.google.com, trình duyệt sẽ:
+
+        // Gửi một yêu cầu (request) theo giao thức HTTP đến server của Google.
+
+        // Server sẽ phản hồi (response) lại bằng nội dung trang web
+
+        // 🔹 2. Cách hoạt động đơn giản của HTTP
+        // Quá trình gồm 2 bước chính:
+
+        // Client gửi HTTP request
+        // → Ví dụ: “Tôi muốn lấy trang chủ của bạn!”
+
+        // Server gửi HTTP response
+        // → Ví dụ: “Đây là nội dung trang chủ!”
+
+        // =============================================
+        // authentication là một đối tượng của Spring Security, đại diện cho người dùng
+        // đã đăng nhập thành công.
+
+        // Cụ thể:
+        // Khi người dùng đăng nhập, Spring Security sẽ xác thực thông tin và tạo ra một
+        // đối tượng Authentication chứa:
+        // Tên đăng nhập (username/email): lấy bằng authentication.getName()
+        // Danh sách quyền (roles): lấy bằng authentication.getAuthorities()
+        // Các thông tin xác thực khác (trạng thái tài khoản, chi tiết user...)
+
+        // Đây là lí do truyền vô authentication
+        // authentication.getName() lấy ra email (hoặc username) của người dùng vừa đăng
+        // nhập thành công.
+        String email = authentication.getName();
+
+        // userService.layUserTheoEmail(email) truy vấn database để lấy đối tượng User
+        // tương ứng với email đó.
+
+        // Phải tiêm userService vào CustomSuccessHandler để có thể gọi phương thức
+        // layUserTheoEmail(email).
+        User user = this.userService.layUserTheoEmail(email);
+
+        // session.setAttribute("username", user.getUsername()); sẽ lưu tên đăng nhập
+        // (username) vào session.
+
+        // Nhờ vậy, ở các trang JSP/view, bạn có thể lấy ra username bằng
+        // ${sessionScope.username} để hiển thị tên người dùng.
+
+        if (user != null) {
+            session.setAttribute("username", user.getUsername());
+        }
+
+    }
+
+    // ===========================================================================
 
 }

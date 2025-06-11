@@ -28,7 +28,7 @@ public class HomePageController {
     // ===============================Trang Chủ==============================
     @GetMapping("/")
     public String getHomePage() {
-        return "client/homepage/show";
+        return "client/homepage/showfake";
 
     }
 

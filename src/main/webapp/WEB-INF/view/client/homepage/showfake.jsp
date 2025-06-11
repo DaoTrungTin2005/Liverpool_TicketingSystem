@@ -11,7 +11,7 @@
 </head>
 <body>
         <h1>Trang chủ FAKE</h1>
-
+<%--  =====================================================================================--%>
         <%-- Khi bạn bấm nút "Đăng xuất", form sẽ gửi POST tới /logout.
             Spring Security sẽ tự động:
             Xoá session
@@ -28,5 +28,14 @@
             <button>Đăng xuất</button>
 
         </form>
+
+<%--  =====================================================================================--%>
+        <p>Tên Người Dùng : </p>
+
+        <%-- Hiển thị giá trị thuộc tính username đang lưu trong session lên trang web. Nếu trong code Java bạn có dòng:
+        session.setAttribute("username", user.getUsername());
+        thì dòng này sẽ in ra tên đăng nhập của user trên giao diện. --%>
+        <c:out value="${sessionScope.username}" />
+
 </body>
 </html> 
