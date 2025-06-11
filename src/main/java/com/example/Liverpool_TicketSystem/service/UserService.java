@@ -34,7 +34,8 @@ public class UserService {
         return this.roleRepository.findByName(name);
     }
 
-    // ============ Lấy User theo email để check signin =================
+    // ============ Lấy User theo email để check signin, để truyền dữ liệu
+    // (username,...) lên view (thông qua session) =================
     // (vì khi signin ta cần nhập email)
     public User layUserTheoEmail(String email) {
         return this.userRepository.findByEmail(email);

@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -165,6 +166,59 @@ public class SecurityConfiguration {
 
                         .anyRequest().authenticated())
 
+                // ===================================================================
+                // 1. .sessionManagement(...): Cấu hình quản lý session
+                // sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
+                // Luôn tạo một HTTP session mới mỗi lần người dùng truy cập.
+
+                // Điều này đảm bảo mỗi request đều có session, kể cả khi chưa đăng nhập.
+
+                // ✅ Ứng dụng: Dùng khi bạn cần session cho mọi request, ví dụ như lưu thông tin
+                // tạm thời hoặc thống kê truy cập.
+
+                .sessionManagement((sessionManagement) -> sessionManagement
+                        .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
+
+                        // invalidSessionUrl("/logout?expired")
+                        // Khi session bị hết hạn (ví dụ: người dùng ngồi lâu không thao tác), họ sẽ
+                        // được redirect đến URL này.
+
+                        // URL /logout?expired thường dùng để hiển thị thông báo “phiên làm việc đã hết
+                        // hạn”.
+                        .invalidSessionUrl("/logout?expired")
+
+                        // maximumSessions(1)
+                        // Chỉ cho 1 session duy nhất cho mỗi người dùng.
+
+                        // Tức là: nếu một người đã đăng nhập rồi, đăng nhập thêm ở máy khác sẽ ảnh
+                        // hưởng đến session
+                        .maximumSessions(1)
+
+                        // maxSessionsPreventsLogin(false)
+                        // Nếu là false: Cho phép người dùng đăng nhập mới, session cũ sẽ bị mất hiệu
+                        // lực (kicked out).
+
+                        // Nếu là true: Không cho đăng nhập mới nếu đã có 1 session đang hoạt động (dùng
+                        // khi muốn bảo mật cao).
+
+                        // ✅ Với false: Ai đăng nhập sau thì được quyền dùng, ai cũ bị đá ra
+                        .maxSessionsPreventsLogin(false))
+
+                // 2. .logout(...): Cấu hình khi người dùng đăng xuất
+                // deleteCookies("JSESSIONID")
+                // Khi người dùng logout, xoá cookie chứa session ID trên trình duyệt.
+
+                // Điều này giúp xóa dấu vết phiên làm việc — tránh bị tái sử dụng.
+
+                // invalidateHttpSession(true)
+                // Khi logout, xoá luôn toàn bộ session ở server (không chỉ cookie).
+
+                // Đảm bảo không còn dữ liệu nào tồn tại, giúp tăng bảo mật và tránh rò rỉ dữ
+                // liệu cũ.
+
+                .logout(logout -> logout.deleteCookies("JSESSIONID").invalidateHttpSession(true))
+                // ===================================================================
+
                 // Đây là cấu hình cho Spring Security để bật chức năng "Remember Me" (giữ đăng
                 // nhập lâu dài).
 
@@ -177,6 +231,8 @@ public class SecurityConfiguration {
                 // (trong thời gian hiệu lực của cookie).
 
                 .rememberMe(r -> r.rememberMeServices(rememberMeServices()))
+
+                // ===================================================================
 
                 // formLogin(...): Cấu hình đăng nhập bằng form.
                 .formLogin(formLogin -> formLogin
