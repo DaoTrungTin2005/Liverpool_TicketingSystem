@@ -1,0 +1,230 @@
+* {
+  box-sizing: border-box;
+}
+html {
+  font-size: 62.5%;
+}
+body {
+  font-size: 1.6rem;
+  background-color: #6b607f;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+input,
+textarea,
+select,
+button {
+  font-family: inherit;
+  font-size: inherit;
+}
+.khoichung {
+  display: flex;
+  width: 83.125%;
+  height: 76.76%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  box-shadow: 0px 48px 128px 0px rgba(0, 0, 0, 0.4);
+}
+.khoitrai {
+  display: flex;
+  flex-direction: column;
+  width: 45%;
+  background-image: linear-gradient(to top, #e82d38 50%, #ee5e5e, #f69e9e);
+  box-shadow: 0px 48px 128px 0px rgba(0, 0, 0, 0.4);
+  position: relative;
+}
+.trai__desc {
+  padding: 62px 0px 20px 0px;
+  text-align: center;
+  color: #fff;
+  font-family: Poppins;
+  font-size: 2.4rem;
+  font-weight: 600;
+  line-height: 0.36; /* 36px */
+}
+.trai__img {
+  padding-bottom: 15px;
+  padding-top: 0px;
+  padding-left: 10px;
+  padding-right: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  height: 100%;
+}
+.trai__img--1 {
+  position: absolute;
+  width: 20%;
+  height: 60%;
+  top: 50%;
+  left: 30%;
+  transform: translate(-50%, -50%);
+  /* animation: animation_tuantu infinite ease-in-out 2s; */
+  animation: swap 15s infinite;
+  animation-delay: 0s;
+}
+.trai__img--2 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20%;
+  height: 60%;
+  animation: swap 15s infinite;
+  animation-delay: 5s;
+}
+.trai__img--3 {
+  position: absolute;
+  top: 50%;
+  left: 70%;
+  width: 20%;
+  height: 60%;
+  transform: translate(-50%, -50%);
+  animation: swap 15s infinite;
+  animation-delay: 10s;
+}
+.trai__point {
+  padding-bottom: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.trai__point svg {
+  width: 7px;
+  height: 7px;
+}
+.point-2 {
+  background-color: aliceblue;
+  color: aliceblue;
+  border-radius: 50%;
+  min-width: 10px;
+  min-height: 10px;
+}
+@keyframes swap {
+  0% {
+    top: 50%;
+    left: 30%;
+    transform: translate(-50%, -50%) scale(1);
+    z-index: 1;
+    opacity: 0.6;
+  }
+  33.33% {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1.2);
+    z-index: 2;
+    opacity: 1;
+  }
+  66.66% {
+    top: 50%;
+    left: 70%;
+    transform: translate(-50%, -50%) scale(0.8);
+    z-index: 1;
+    opacity: 0.5;
+  }
+  100% {
+    top: 50%;
+    left: 30%;
+    transform: translate(-50%, -50%) scale(1);
+    z-index: 1;
+    opacity: 0.6;
+  }
+}
+/*  */
+.khoiphai {
+  display: flex;
+  flex-direction: column;
+  width: 55%;
+}
+.khoitren {
+  padding: 20px 180px 82px 159px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.create {
+  color: #1d1d1d;
+  text-shadow: 0px 5px 4px rgba(0, 0, 0, 0.25);
+  font-size: 4rem;
+  font-weight: 600;
+  line-height: 0.56; /* 56px */
+}
+.nhaplieu {
+  padding: 0px 73px 50px 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+}
+.label {
+  width: 90px;
+  height: 29px;
+  color: #000;
+  font-size: 1.4rem;
+  line-height: 0.2; /* 19.6px */
+}
+.input {
+  cursor: pointer;
+  border: 2px solid black;
+  width: 100%;
+  height: 60%;
+  background-color: #d9d9d9;
+}
+.thechon {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.thechon .label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.khoiduoi {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 100px;
+  padding-top: 0px;
+}
+.btn {
+  width: 400px;
+  height: 68px;
+  color: #fff;
+  font-size: 4rem;
+  font-weight: 600;
+  line-height: 0.56; /* 56px */
+  border-radius: 20px;
+  background: #f43a3d;
+  cursor: pointer;
+}
+.btn:hover {
+  color: #000;
+  background: #fff;
+  box-shadow: 0px 6px 4px 0px rgba(0, 0, 0, 0.25);
+}
+.link {
+  color: currentColor;
+  text-decoration: none;
+}
+.trai__desc .link img {
+  color: #e82d38;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 40px;
+  height: 30px;
+}
+.trai__desc .link img:hover {
+  scale: 1.2;
+}

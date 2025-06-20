@@ -125,6 +125,10 @@
               <%-- DaoAuthenticationProvider là nơi xử lý logic xác thực, so sánh mật khẩu, và chỉ nhận đúng hai tham số username và password từ form mặc định của Spring Security. --%>
 
               <%-- Còn phần path là các thuộc tính ở domain  --%>
+
+              <%-- Spring dùng path để:
+              Tìm đúng thuộc tính trong domain
+              Gán giá trị từ form vào đúng vị trí --%>
               <input class="mail" path="email" type="email" name="username"/>
           </div>
 

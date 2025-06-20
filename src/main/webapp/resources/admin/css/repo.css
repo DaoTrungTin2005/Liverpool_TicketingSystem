@@ -1,0 +1,75 @@
+/* PC */
+@media (min-width: 992px) {
+  .khoian {
+    display: none;
+  }
+}
+/* mtb va dt */
+@media (max-width: 991.98px) {
+  .khoiadmin {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+  .admin_svg {
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    top: 0;
+    right: 0px;
+  }
+  .khoiicon {
+    display: none;
+  }
+  .admin__noidung {
+    display: none;
+  }
+  .khoian {
+    width: 102px;
+    margin: 0 auto;
+  }
+  .item__listmb {
+    padding-top: 65px;
+    display: flex;
+    flex-direction: column;
+    gap: 90px;
+  }
+  .khoiavt {
+    padding-top: 270px;
+  }
+  .hinhtindao {
+    padding-top: 100px;
+    margin: 0 auto;
+  }
+  .item__content,
+  .item__svg {
+    display: none;
+  }
+  .khoionline {
+    display: none;
+  }
+  .khoitieude {
+    display: flex;
+    gap: 10px;
+    max-width: 700px;
+  }
+  .khoinhap {
+    max-width: 700px;
+  }
+  .khoiduoi {
+    max-width: 700px;
+    position: relative;
+  }
+  .show {
+    position: absolute;
+    left: 40px;
+  }
+  .but {
+    position: absolute;
+    left: 100px;
+  }
+}
+/* mtb */
+@media (min-width: 768px) and (max-width: 991.98px) {
+}
+/* tạm ẩn phần ko lq */

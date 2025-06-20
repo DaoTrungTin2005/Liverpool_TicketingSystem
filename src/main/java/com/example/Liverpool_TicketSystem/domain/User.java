@@ -30,6 +30,10 @@ public class User {
 
     // 1 role có nhiều user sử dụng (nhiều user có thể có cùng 1 role)
     // 1 user chỉ có 1 role
+
+    // Nếu bạn dùng @OneToOne thay vì @ManyToOne, JPA sẽ không cho phép nhiều user
+    // cùng 1 role, và có thể gây lỗi khi insert dữ liệu.
+
     @ManyToOne
 
     // Chỉ định cột role_id trong bảng users là khóa ngoại liên kết tới bảng roles.
@@ -59,8 +63,6 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
-
-
 
     public Role getRole() {
         return role;

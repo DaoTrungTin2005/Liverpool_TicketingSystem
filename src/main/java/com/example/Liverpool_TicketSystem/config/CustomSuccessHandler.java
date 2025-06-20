@@ -344,6 +344,9 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler {
         // session.setAttribute("username", user.getUsername()); sẽ lưu tên đăng nhập
         // (username) vào session.
 
+        // session.getAttribute("username")
+        // dùng để lấy lại giá trị đã lưu trong session với key "username".
+
         // Nhờ vậy, ở các trang JSP/view, bạn có thể lấy ra username bằng
         // ${sessionScope.username} để hiển thị tên người dùng.
 

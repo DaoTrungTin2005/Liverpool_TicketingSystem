@@ -1,0 +1,296 @@
+* {
+  box-sizing: border-box;
+}
+html {
+  font-size: 62.5%;
+}
+body {
+  font-size: 1.6rem;
+}
+/* chung */
+p {
+  color: #9197b3;
+  font-family: Poppins;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: -0.14px;
+}
+a {
+  text-decoration: none;
+}
+input,
+textarea,
+select,
+button,
+label {
+  font-family: inherit;
+  font-size: inherit;
+}
+/*  */
+.khoichung {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+}
+.khoitrai {
+  display: flex;
+  flex-direction: column;
+  width: 21.25%;
+  background-color: #ffffff;
+  box-shadow: 0px 10px 60px 0px rgba(226, 236, 249, 0.5);
+}
+.khoiadmin {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 36px 45px 65px 28px;
+}
+.admin__img {
+  width: 37px;
+  height: 37px;
+}
+.admin__noidung {
+  color: #000;
+  font-size: 2.6rem;
+  font-weight: 600;
+  letter-spacing: 0.26px;
+}
+.item__list {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 19px;
+  justify-content: center;
+  padding-left: 39px;
+  padding-right: 26px;
+}
+.item__list-item {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 25px;
+  align-items: center;
+  transition: 0.5s;
+}
+.item__img {
+  width: 38px;
+  height: 24px;
+  padding-right: 14px;
+  padding-left: 0;
+  color: #9197b3;
+}
+.item__desc {
+  color: #9197b3;
+  font-size: 1.4rem;
+  letter-spacing: -0.14px;
+  padding-right: 1.33rem;
+}
+.item__muiten {
+  color: #9197b3;
+}
+.item__list-item:hover {
+  border-radius: 8px;
+  background: #5932ea;
+  padding-left: 30px 28px 30px;
+}
+/*  */
+.khoiavt {
+  cursor: pointer;
+  padding: 350px 28px 0px;
+  display: flex;
+  justify-content: space-between;
+}
+.hinhtindao {
+  border-radius: 42px;
+}
+.khoiavt .item__svg {
+  cursor: pointer;
+  rotate: 90deg;
+  width: 24px;
+  height: 24px;
+}
+.item__content {
+  padding-left: 10px;
+  padding-right: 60px;
+}
+/* khoi hello */
+.khoiphai {
+  padding: 41px 95px 76px 71px;
+}
+.hello {
+  color: #000;
+  font-size: 2.4rem;
+  font-weight: 500;
+}
+.khoihello {
+  padding-bottom: 47px;
+}
+.khoitieude {
+  /* width: 968px;
+  height: 151px; */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  box-shadow: 0px 10px 60px rgba(226, 236, 249, 0.5);
+}
+.khoitieude-item {
+  display: flex;
+}
+.liver__topic {
+  display: flex;
+}
+.tieude-img {
+  padding: 32px 20px 35px 50px;
+}
+.khoicontent {
+  padding: 32px 0 36px;
+}
+.liver__content {
+  padding-bottom: 4px;
+  padding-right: 29px;
+  color: #acacac;
+  font-size: 1.4rem;
+  font-weight: 400;
+  letter-spacing: -0.14px;
+}
+.liver__number {
+  padding-bottom: 6px;
+  color: #333;
+  font-size: 3.2rem;
+  letter-spacing: -0.32px;
+}
+.liver__topic {
+  padding-right: 48px;
+  gap: 10px;
+}
+.liver__img {
+  width: 25px;
+  height: 25px;
+}
+/*  */
+.khoinhap {
+  display: flex;
+  flex-direction: column;
+  margin-top: 35px;
+  background-color: #fff;
+  box-shadow: 0px 10px 60px rgba(226, 236, 249, 0.5);
+}
+.tren-desc {
+  padding-top: 20px;
+  padding-left: 38px;
+  color: #000;
+  font-size: 2.2rem;
+  font-weight: 600;
+}
+.khoitren {
+  display: flex;
+  justify-content: space-between;
+}
+.tren-topic {
+  display: flex;
+  padding-right: 44px;
+  padding-top: 44px;
+  padding-bottom: 49px;
+}
+.form {
+  border-radius: 10px;
+  background: #f9fbff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.form-input {
+  cursor: pointer;
+  border: none currentColor;
+  padding-right: 36px;
+}
+.form__sapxep {
+  cursor: pointer;
+  margin-left: 16px;
+  color: #7e7e7e;
+  font-size: 1.2rem;
+  font-weight: 400;
+}
+.Newest {
+  color: #3d3c42;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+/*  */
+.khoigiua {
+  padding: 0px 44px 26px 38px;
+  display: grid;
+  grid-template-columns: 1fr 1.2fr 1fr 1.5fr 1fr;
+  grid-template-rows: repeat(1, 1fr);
+  gap: 10px;
+}
+.grid-row {
+  display: contents;
+  text-align: center;
+}
+.grid-row::after {
+  content: "";
+  grid-column: 1/-1;
+  border-bottom: 1px solid #000;
+}
+.btn {
+  cursor: pointer;
+  width: 60px;
+  border-radius: 4px;
+}
+.khoiduoi {
+  padding: 0 700px 28px 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.but {
+  background-color: rgba(22, 192, 152, 0.38);
+  border-radius: 8px;
+  margin-left: 39px;
+  width: 150px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: currentColor;
+}
+.but:hover {
+  box-shadow: 2px 4px 4px rgba(79, 42, 234, 0.17);
+}
+.but a {
+  color: #008767;
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+.form__grid {
+  display: flex;
+  gap: 5px;
+  text-align: center;
+}
+.btn__update {
+  border: #3d3900;
+  background: #ffff9f;
+}
+.btn__update a {
+  color: #3d3900;
+}
+.btn__delete {
+  background-color: #ffc5c5;
+  border: #df0404;
+}
+.btn__delete a {
+  color: #df0404;
+}
+.btn__read {
+  background-color: #82cafa;
+  border: #1c0a8e;
+}
+.btn__read a {
+  color: #1c0a8e;
+}
+.btn:hover {
+  transform: scale(1.1);
+}
