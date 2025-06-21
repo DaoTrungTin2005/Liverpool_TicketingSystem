@@ -26,7 +26,7 @@ public class UserService {
         return user;
     }
 
-    // ============ fix cứng role là user khi ng dùng đăng kí===============
+    // ============ fix cứng role là user khi ng dùng đăng kí, khi tạo mới Acount (Chọn ADMIN, USER)===============
     // Dùng để lấy đối tượng Role (vai trò người dùng, ví dụ: "USER", "ADMIN") từ
     // database dựa vào tên role.
 

@@ -24,7 +24,7 @@
         <div class="khoitrai">
 
             <div class="trai__desc">
-                <a href="/admin" class="link"
+                <a href="/admin/accounts" class="link"
                     ><img src="/admin/images/arrow-left-solid.svg" alt=""
                 /></a>
                 <p class="desc">You will never walk alone</p>
@@ -86,38 +86,60 @@
                 <p class="create">Create Account</p>
             </div>
 
+
+        <form:form method="post" action="/admin/create" modelAttribute="newUser"> 
             <div class="nhaplieu">
-                <form action="" class="form username">
+
+                <div class="form username">
                     <label for="" class="label">Username</label>
-                    <input type="text" class="input" />
-                </form>
-                <form action="" class="form password">
-                    <label for="" class="label">Password</label>
-                    <input type="password" class="input" />
-                </form>
-                <form action="" class="form email">
+                    <form:input type="text" class="input" path="username"/>
+                </div>
+
+                <div class="form email">
                     <label for="" class="label">Email</label>
-                    <input type="email" class="input" />
-                </form>
-                <form action="" class="form role">
+                    <form:input type="email" class="input" path="email"/>
+                </div>
+
+                <div class="form password">
+                    <label for="" class="label">Password</label>
+                    <form:input type="password" class="input" path="password" />
+                </div>
+
+                <div class="form role">
                     <label for="" class="label">Role</label>
-                    <div class="thechon">
+                    <div class="thechon ">
+
+                    <!-- Khi bạn viết path="role.name", bạn đang bảo Spring Form làm như sau:
+                    Tìm đối tượng newUser (là một User).
+                    Truy cập thuộc tính role của newUser (tức là gọi newUser.getRole()).
+                    Sau đó, truy cập thuộc tính name của đối tượng Role đó (tức là gọi newUser.getRole().getName() khi hiển thị và newUser.getRole().setName() khi submit).  -->
+
+                    <!--  Khi bạn viết:
+                    <form:radiobutton path="role.name" value="ADMIN" />
+
+                    Nó có nghĩa là:
+                    user.getRole().setName("ADMIN"); (tự động tạo Role nếu cần)
+                    Vì bạn đang chọn name của một object role → nên phải ghi role.name -->
+
                     <label class="label"
-                        ><input type="radio" name="role" class="input" />ADMIN</label
+                        ><form:radiobutton path="role.name"  class="input" value="ADMIN" />ADMIN</label
                     >
                     <label class="label"
-                        ><input type="radio" name="role" class="input" />USER</label
+                        ><form:radiobutton path="role.name"  class="input" value="USER" />USER</label
                     >
                     </div>
-                </form>
+                </div>
+
             </div>
 
             <div class="khoiduoi">
-                <button class="btn">
-                    <a href="" class="link">Create Account</a>
+                <button class="btn" type="submit">
+                    Create Account
                 </button>
             </div>
         </div>
+        </form:form>
+
 
     </div>
         <script src="./thaotac.js"></script>
