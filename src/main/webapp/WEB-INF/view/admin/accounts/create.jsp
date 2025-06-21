@@ -108,18 +108,22 @@
 
                 <div class="form username">
                     <label for="" class="label">Username</label>
-                    <form:input type="text" class="input" path="username"/>
+                    <form:input type="text" class="input" path="username" autocomplete="off"/>
+                    <form:errors class="error" path="username"  />
                 </div>
 
                 <div class="form email">
                     <label for="" class="label">Email</label>
-                    <form:input type="email" class="input" path="email"/>
+                    <form:input type="email" class="input" path="email" autocomplete="off"/>
+
+                    <!-- bắt điều kiện -->
                     <form:errors class="error" path="email"  />
                 </div>
 
                 <div class="form password">
                     <label for="" class="label">Password</label>
                     <form:input type="password" class="input" path="password" />
+                    <form:errors class="error" path="password"  />
                 </div>
 
                 <div class="form role">

@@ -2,6 +2,9 @@ package com.example.Liverpool_TicketSystem.domain.dto;
 
 import com.example.Liverpool_TicketSystem.service.validator.RegisterChecked;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Size;
+
 // ý tưởng là bắt email đã tồn tại ở cái create tài khoản (ở trang admin)
 // mà cái RegisterChecked ban đầu chỉ để cho thăng RegisterDTO nó xài thôi (thnawgf này xài lúc signup (check email tồn tại và so sánh confirmpass vs pass))
 //Bây giờ muốn bắt email đã tồn tại ở cái create tài khoản (ở trang admin) thì tạo thêm CreateAccountDTO và CreateAccountValidate (ở RegisterChecked sẽ đăng kí cái createAccountValidate)
@@ -16,8 +19,13 @@ import com.example.Liverpool_TicketSystem.service.validator.RegisterChecked;
 @RegisterChecked
 public class CreateAccountDTO {
 
+    @Size(min = 2, message = "Username must be at least 2 characters long")
     private String username;
+
+    @Size(min = 3, message = "Password must be at least 3 characters long")
     private String password;
+
+    @Email(message = "Invalid email address", regexp = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$")
     private String email;
     private String roleName; // ví dụ: "ADMIN" hoặc "USER"
 
