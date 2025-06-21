@@ -16,6 +16,22 @@
         rel="stylesheet"
         />
         <title>Create Account</title>
+
+        <style>
+        .error {
+            color: red;
+            font-size: 0.9rem;
+            margin-top: 4px;
+            display: block;
+            padding: 0;
+        }
+
+        .error::before {
+            content: "⚠ ";
+            font-weight: bold;
+        }
+        </style>
+
     </head>
 
     <body>
@@ -98,6 +114,7 @@
                 <div class="form email">
                     <label for="" class="label">Email</label>
                     <form:input type="email" class="input" path="email"/>
+                    <form:errors class="error" path="email"  />
                 </div>
 
                 <div class="form password">
@@ -109,23 +126,30 @@
                     <label for="" class="label">Role</label>
                     <div class="thechon ">
 
-                    <!-- Khi bạn viết path="role.name", bạn đang bảo Spring Form làm như sau:
+                    <!-- ========================================================== -->
+
+                    <!--  Hiện tại do muốn validate email tồn tại nên tạo thêm cái CreateAccountDTO. Do
+                    đó bị vướng cái chỗ role (ban đầu tạo 2 bảng Role và User) nên không làm code này nữa)  -->
+                    <!-- Sử dụng roleName ở lớp DTO -->
+
+                    <%-- Khi bạn viết path="role.name", bạn đang bảo Spring Form làm như sau:
                     Tìm đối tượng newUser (là một User).
                     Truy cập thuộc tính role của newUser (tức là gọi newUser.getRole()).
-                    Sau đó, truy cập thuộc tính name của đối tượng Role đó (tức là gọi newUser.getRole().getName() khi hiển thị và newUser.getRole().setName() khi submit).  -->
+                    Sau đó, truy cập thuộc tính name của đối tượng Role đó (tức là gọi newUser.getRole().getName() khi hiển thị và newUser.getRole().setName() khi submit).  --%>
 
-                    <!--  Khi bạn viết:
+                    <%--  Khi bạn viết:
                     <form:radiobutton path="role.name" value="ADMIN" />
 
                     Nó có nghĩa là:
                     user.getRole().setName("ADMIN"); (tự động tạo Role nếu cần)
-                    Vì bạn đang chọn name của một object role → nên phải ghi role.name -->
+                    Vì bạn đang chọn name của một object role → nên phải ghi role.name --%>
 
+                    <!-- ================================================================= -->
                     <label class="label"
-                        ><form:radiobutton path="role.name"  class="input" value="ADMIN" />ADMIN</label
+                        ><form:radiobutton path="roleName"  class="input" value="ADMIN" />ADMIN</label
                     >
                     <label class="label"
-                        ><form:radiobutton path="role.name"  class="input" value="USER" />USER</label
+                        ><form:radiobutton path="roleName"  class="input" value="USER" />USER</label
                     >
                     </div>
                 </div>

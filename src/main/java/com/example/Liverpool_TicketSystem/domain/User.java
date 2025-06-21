@@ -1,5 +1,7 @@
 package com.example.Liverpool_TicketSystem.domain;
 
+import com.example.Liverpool_TicketSystem.service.validator.RegisterChecked;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;

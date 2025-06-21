@@ -9,8 +9,8 @@ import java.lang.annotation.Target;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 
-
-@Constraint(validatedBy = RegisterValidator.class)
+// Xài 2 cái thì ghi 2 cái
+@Constraint(validatedBy = { RegisterValidator.class, CreateAccountValidator.class })
 @Target({ ElementType.TYPE }) // Adjusted to apply to the class level
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
