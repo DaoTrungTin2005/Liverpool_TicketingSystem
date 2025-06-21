@@ -1,5 +1,7 @@
 package com.example.Liverpool_TicketSystem.Controller.admin;
 
+import java.util.List;
+
 import javax.swing.Spring;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -14,26 +16,26 @@ import com.example.Liverpool_TicketSystem.domain.User;
 import com.example.Liverpool_TicketSystem.service.UserService;
 
 @Controller
-public class CustomersController {
+public class UserController {
     private final UserService userService;
     private final PasswordEncoder passwordEncoder;
 
-    public CustomersController(UserService userService, PasswordEncoder passwordEncoder) {
+    public UserController(UserService userService, PasswordEncoder passwordEncoder) {
         this.userService = userService;
         this.passwordEncoder = passwordEncoder;
     }
 
-    @GetMapping("/admin/create")
-    public String getCreateCustomersPage(Model model) {
+    @GetMapping("/admin/accounts/create")
+    public String getCreateAccountsPage(Model model) {
         model.addAttribute("newUser", new User());
-        return "admin/customers/create";
+        return "admin/accounts/create";
     }
 
     // @ModelAttribute("newUser") User user: Spring sẽ lấy dữ liệu từ form HTTP POST
     // và ánh xạ nó vào một đối tượng User mới
 
-    @PostMapping("/admin/create")
-    public String getCreateCustomersPage(@ModelAttribute("newUser") User user) {
+    @PostMapping("/admin/accounts/create")
+    public String getCreateAccountsPage(@ModelAttribute("newUser") User user) {
         String hashPassword = this.passwordEncoder.encode(user.getPassword());
         user.setPassword(hashPassword);
 
@@ -85,7 +87,12 @@ public class CustomersController {
         user.setRole(this.userService.layRoleTheoTen(user.getRole().getName()));
 
         this.userService.luuThongTinUser(user);
-        return "redirect:/admin/accounts";
+
+        // ✔️ Tạo, sửa, xóa thành công → dùng redirect:
+        // ❌ Hiển thị form (GET) → không cần redirect
+        return "redirect:/admin";
 
     }
+    // ================================================================
+
 }

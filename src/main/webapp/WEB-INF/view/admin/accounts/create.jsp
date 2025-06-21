@@ -24,7 +24,7 @@
         <div class="khoitrai">
 
             <div class="trai__desc">
-                <a href="/admin/accounts" class="link"
+                <a href="/admin" class="link"
                     ><img src="/admin/images/arrow-left-solid.svg" alt=""
                 /></a>
                 <p class="desc">You will never walk alone</p>
@@ -87,7 +87,7 @@
             </div>
 
 
-        <form:form method="post" action="/admin/create" modelAttribute="newUser"> 
+        <form:form method="post" action="/admin/accounts/create" modelAttribute="newUser"> 
             <div class="nhaplieu">
 
                 <div class="form username">

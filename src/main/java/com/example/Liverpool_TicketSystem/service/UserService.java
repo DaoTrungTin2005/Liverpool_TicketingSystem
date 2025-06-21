@@ -1,5 +1,7 @@
 package com.example.Liverpool_TicketSystem.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.example.Liverpool_TicketSystem.domain.Role;
@@ -45,6 +47,13 @@ public class UserService {
     // cái này để check lúc signup (đăng ký) tài khoản
     public boolean kiemTraEmailTonTai(String email) {
         return this.userRepository.existsByEmail(email);
+    }
+
+    //================Lấy tất cả user ===================================
+    // Để hiện tất cả tài khoản trên trang Admin
+
+    public List<User> layTatCaUser(){
+        return this.userRepository.findAll();
     }
 
 }

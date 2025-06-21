@@ -167,7 +167,7 @@
             </div>
 
             <div class="khoinhap">
-                <div class="khoitren">b
+                <div class="khoitren">
                     <p class="tren-desc">All Customers</p>
 
                     <div class="tren-topic">
@@ -190,31 +190,37 @@
                 </div>
 
                 <div class="khoigiua">
-                    <div class="grid-row">
-                        <p class="truong">UserID</p>
-                        <p class="truong">Username</p>
-                        <p class="truong">Role</p>
-                        <p class="truong">Email</p>
-                        <p class="truong">Action</p>
-                    </div>
+                        <div class="grid-row">
+                            <p class="truong">UserID</p>
+                            <p class="truong">Username</p>
+                            <p class="truong">Email</p>
+                            <p class="truong">Role</p>
+                            <p class="truong">Action</p>
+                        </div>
 
-                    <div class="grid-row">
-                        <p class="row">001A</p>
-                        <p class="row">Dat</p>
-                        <p class="row">Admin</p>
-                        <p class="row">Tinoi@gmail.conbo</p>
-                        <form class="form__grid" action="">
-                                <button class="btn btn__update"><a href="#!" class="link">Update</a></button>
-                                <button class="btn btn__delete"><a href="#!" class="link">Delete</a></button>
-                                <button class="btn btn__read"><a href="#!" class="link">View</a></button>
-                        </form>
-                    </div>
+                    <%-- Ý tưởng sử dụng vòng lặp bên JSP để in ra danh sách tài khoản --%>
+                    <%-- items="${users}": lấy danh sách users từ controller truyền vào model. --%>
+                    <c:forEach var="userItem" items="${users}">
+                        <div class="grid-row">
+                            <p class="row">${userItem.id}</p>
+                            <p class="row">${userItem.username}</p>
+                            <p class="row">${userItem.email}</p>
+                            <p class="row">${userItem.role.name}</p>
+
+                            <form class="form__grid" action="">
+                                    <button class="btn btn__update"><a href="#!" class="link">Update</a></button>
+                                    <button class="btn btn__delete"><a href="#!" class="link">Delete</a></button>
+                                    <button class="btn btn__read"><a href="#!" class="link">View</a></button>
+                            </form>
+                        </div>
+                    </c:forEach>
+
                 </div>
 
                 <div class="khoiduoi">
                     <p class="show">Showing data</p>
                     <button class="but btn">
-                        <a href="/admin/create" class="link">Create User</a>
+                        <a href="/admin/accounts/create" class="link">Create User</a>
                     </button>
                 </div>
 
