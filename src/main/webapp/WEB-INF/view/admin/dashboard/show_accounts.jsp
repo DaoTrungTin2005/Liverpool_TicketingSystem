@@ -107,7 +107,7 @@
                 <div class="khoiavt">
                     <img src="/admin/images/tindao.png" alt="" class="hinhtindao" />
                     <div class="item__content">
-                        <p class="content-top">Tin Dao Trung</p>
+                        <p class="content-top"><c:out value="${sessionScope.username}" /></p>
                         <p class="content-bot">Project Manager</p>
                     </div>
                     <img src="/admin/images/chevron-right 2.png" alt="" class="item__svg" />
@@ -119,7 +119,7 @@
 
             <div class="khoiphai">
                 <div class="khoihello">
-                    <p class="hello">Hello Tin Dao Trung 👋🏼,</p>
+                    <p class="hello">Hello <c:out value="${sessionScope.username}" /> 👋🏼</p>
                 </div>
 
                 <div class="khoitieude">
