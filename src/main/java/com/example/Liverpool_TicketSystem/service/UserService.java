@@ -28,7 +28,8 @@ public class UserService {
         return user;
     }
 
-    // ============ fix cứng role là user khi ng dùng đăng kí, khi tạo mới Acount (Chọn ADMIN, USER)===============
+    // ============ fix cứng role là user khi ng dùng đăng kí, khi tạo mới Acount
+    // (Chọn ADMIN, USER)===============
     // Dùng để lấy đối tượng Role (vai trò người dùng, ví dụ: "USER", "ADMIN") từ
     // database dựa vào tên role.
 
@@ -49,11 +50,16 @@ public class UserService {
         return this.userRepository.existsByEmail(email);
     }
 
-    //================Lấy tất cả user ===================================
+    // ================Lấy tất cả user ===================================
     // Để hiện tất cả tài khoản trên trang Admin
 
-    public List<User> layTatCaUser(){
+    public List<User> layTatCaUser() {
         return this.userRepository.findAll();
+    }
+
+    // ========Đếm số tài khoản để hiên thị lên view (bên admin)==========
+    public long demSoTaiKhoan(){
+        return this.userRepository.count();
     }
 
 }

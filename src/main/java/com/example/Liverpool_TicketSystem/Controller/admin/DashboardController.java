@@ -29,6 +29,9 @@ public class DashboardController {
         // Tham số thứ hai users là biến trong Java (controller).
         model.addAttribute("users", users);
 
+        long tongSoTaiKhoan = userService.demSoTaiKhoan();
+        model.addAttribute("tongSoTaiKhoan", tongSoTaiKhoan);
+
         return "admin/dashboard/show_accounts";
     }
 }

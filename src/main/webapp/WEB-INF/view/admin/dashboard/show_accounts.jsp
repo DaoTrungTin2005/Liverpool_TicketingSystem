@@ -141,8 +141,8 @@
                         <img src="/admin/images/c1.png" alt="" class="tieude-img" />
 
                             <div class="khoicontent">
-                                <p class="liver__content">Customers</p>
-                                <p class="liver__number">1</p>
+                                <p class="liver__content">Accounts</p>
+                                <p class="liver__number">${tongSoTaiKhoan}</p>
 
                                 <div  class="liver__topic">
                                     <img src="/admin/images/c1khangia.png" alt="" class="liver__img">
