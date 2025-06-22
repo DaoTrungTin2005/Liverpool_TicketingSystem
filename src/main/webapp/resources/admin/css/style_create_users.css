@@ -21,7 +21,7 @@ button {
 .khoichung {
   display: flex;
   width: 83.125%;
-  height: 76.76%;
+  height: 83.76%;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -143,7 +143,7 @@ button {
   width: 55%;
 }
 .khoitren {
-  padding: 20px 180px 82px 159px;
+  padding: 30px 180px 62px 159px;
   display: flex;
   justify-content: center;
   align-items: center;

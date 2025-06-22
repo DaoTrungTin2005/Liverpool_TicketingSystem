@@ -3,6 +3,7 @@ package com.example.Liverpool_TicketSystem.domain.dto;
 import com.example.Liverpool_TicketSystem.service.validator.RegisterChecked;
 
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 // ý tưởng là bắt email đã tồn tại ở cái create tài khoản (ở trang admin)
@@ -27,6 +28,8 @@ public class CreateAccountDTO {
 
     @Email(message = "Invalid email address", regexp = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$")
     private String email;
+
+    @NotBlank(message = "Please choose role")
     private String roleName; // ví dụ: "ADMIN" hoặc "USER"
 
     public String getRoleName() {

@@ -155,6 +155,7 @@
                     <label class="label"
                         ><form:radiobutton path="roleName"  class="input" value="USER" />USER</label
                     >
+                    <form:errors class="error" path="roleName"  />
                     </div>
                 </div>
 
