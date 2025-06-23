@@ -12,7 +12,7 @@
         <link rel="stylesheet" href="/admin/css/repo.css">
         <title>Admin</title>
     </head>
-    <body>
+    <body style="height: 100000px;">
 
         <div class="khoichung">
 
